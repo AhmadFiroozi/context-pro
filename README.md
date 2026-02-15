@@ -1,16 +1,58 @@
-# React + Vite
+📱 Simple Shopping Cart (React + Context API)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+این یک پروژه فروشگاه موبایل ساده و جمع‌وجور است که برای تمرین مدیریت استیت (State Management) با استفاده از Context API در React ساخته شده است.
 
-## React Compiler
+🚀 ویژگی‌های پروژه
+بدون API: داده‌ها به صورت استاتیک از یک فایل داخلی بارگذاری می‌شوند.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+مدیریت استیت: استفاده از Context Hook برای جلوگیری از Prop Drilling.
 
-## Expanding the ESLint configuration
+طراحی داینامیک: کامپوننت‌ها بر اساس داده‌های ورودی رندر می‌شوند.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+صفحه‌بندی: دارای دو مسیر اصلی (Home و Cart).
+
+🛠 تکنولوژی‌های استفاده شده
+React.js
+
+React Router Dom (برای جابجایی بین صفحات)
+
+Context API (مدیریت سبد خرید)
+
+
+📂 ساختار مسیرها (Routes)
+پروژه شامل دو روت اصلی است:
+
+Home (/): نمایش لیست موبایل‌ها و دکمه "افزودن به سبد خرید".
+
+Cart (/cart): نمایش محصولاتی که کاربر انتخاب کرده است.
+
+💻 نحوه اجرا
+برای اجرای پروژه روی سیستم خودتان، مراحل زیر را دنبال کنید:
+
+کلون کردن مخزن:
+
+Bash
+git clone https://github.com/AhmadFiroozi/shopping-cart-context.git
+نصب پکیج‌ها:
+
+Bash
+npm install
+اجرای پروژه:
+
+Bash
+npm run dev
+
+
+🧠 ساختار Context
+
+
+در این پروژه از یک CartContext استفاده شده که وظیفه نگهداری آرایه‌ای از محصولات انتخاب شده را دارد. توابع اصلی موجود در Context:
+
+addToCart: اضافه کردن موبایل به سبد.
+
+removeFromCart: حذف آیتم از سبد خرید.
+
+📝 یادداشت توسعه‌دهنده
+این پروژه با هدف سادگی (Keep It Simple) طراحی شده است؛ به همین دلیل بخش "جمع کل قیمت" یا اتصال به درگاه پرداخت در این نسخه وجود ندارد و تمرکز اصلی روی جابجایی داده بین کامپوننت‌هاست.
