@@ -1,45 +1,30 @@
 import "./ProductItem.css";
-import ProductsList from "../../db";
-import { useContext } from "react";
-import { AppContext } from "../context/AppContext";
+import { useCart } from "../context/AppContext";
+
 function ProductItem({ id, name, price, image }) {
-  const { addToCart, setAddToCart, addedProduct, setAddedProduct } =
-    useContext(AppContext);
-  const addToCartbtn = () => {
-    const isProductExistInCart = () => {
-      return addedProduct.some((product) => product.id == id);
-    };
-    if (isProductExistInCart()) {
-      const updateAddedProduct = [...addedProduct];
-      updateAddedProduct.map((product) => {
-        if (product.id == id) {
-          product.count += 1;
-          product.totalPrice = product.count * product.price;
-        }
-        setAddedProduct(updateAddedProduct);
-        return;
-      });
-    } else {
-      setAddToCart(addToCart + 1);
-      const product = ProductsList.find((product) => product.id == id);
-      product.count = 1;
-      product.totalPrice = product.count * product.price;
-      setAddedProduct((pervState) => [...pervState, product]);
-    }
-  };
+  const { addToCart, cartItems } = useCart();
+
+  const inCart = cartItems.find((item) => item.id === id);
+
   return (
     <div className="productCard">
       <div className="productImage">
-        <img className="img-fluid" src={image} />
+        <img className="img-fluid" src={image} alt={name} loading="lazy" />
       </div>
+
       <div className="cardBody">
-        <h5> {name}</h5>
-        <p className="price">price:{price.toLocaleString()}</p>
-        <button onClick={addToCartbtn} className="btn btn-primary">
-          add to cart
+        <h5>{name}</h5>
+        <p className="price">{price.toLocaleString()} Toman</p>
+
+        <button
+          onClick={() => addToCart({ id, name, price, image })}
+          className="btn btn-primary"
+        >
+          {inCart ? `In cart (${inCart.count})` : "Add to cart"}
         </button>
       </div>
     </div>
   );
 }
+
 export default ProductItem;

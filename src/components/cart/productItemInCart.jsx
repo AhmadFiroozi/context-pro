@@ -1,59 +1,37 @@
-import "./ProductItemInCart.css";
+import "./productItemInCart.css";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { AppContext } from "../context/AppContext";
-import { useContext } from "react";
+import { useCart } from "../context/AppContext";
 
-function ProductItemInCart({ id, name, price, image, count, totalPrice }) {
-  const { addToCart, setAddToCart, addedProduct, setAddedProduct } =
-    useContext(AppContext);
-  const decreaseHandler = () => {
-    const updateAddedProducts = [...addedProduct];
-    updateAddedProducts.map((product) => {
-      if (product.id === id) {
-        product.count -= 1;
-        product.totalPrice = product.count * product.price;
-        setAddedProduct(updateAddedProducts);
-      }
-    });
-  };
-  const increaseHandler = () => {
-    const updateAddedProducts = [...addedProduct];
-    updateAddedProducts.map((product) => {
-      if (product.id === id) {
-        product.count += 1;
-        product.totalPrice = product.count * product.price;
-        setAddedProduct(updateAddedProducts);
-      }
-    });
-  };
-  const removeHandler = () => {
-    const updateAddedProducts = addedProduct.filter(
-      (product) => product.id !== id
-    );
-    setAddedProduct(updateAddedProducts);
-    setAddToCart(addToCart - 1);
-  };
+function ProductItemInCart({ id, name, price, image, count }) {
+  const { increaseCount, decreaseCount, removeFromCart } = useCart();
+
   return (
     <div className="productItemInCart">
       <div className="cardLeft">
-        <img src={image} />
+        <img src={image} alt={name} />
       </div>
 
       <div className="cardMiddle">
         {count > 1 ? (
-          <button onClick={decreaseHandler}>-</button>
+          <button onClick={() => decreaseCount(id)} aria-label="Decrease quantity">
+            −
+          </button>
         ) : (
-          <button onClick={removeHandler}>
+          <button onClick={() => removeFromCart(id)} aria-label="Remove item">
             <RiDeleteBin6Line />
           </button>
         )}
+
         <span>{count}</span>
-        <button onClick={increaseHandler}>+</button>
+
+        <button onClick={() => increaseCount(id)} aria-label="Increase quantity">
+          +
+        </button>
       </div>
 
       <div className="cardRight">
         <h5>{name}</h5>
-        <p>price : {totalPrice.toLocaleString()}</p>
+        <p>{(price * count).toLocaleString()} Toman</p>
       </div>
     </div>
   );

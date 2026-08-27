@@ -1,20 +1,32 @@
-import { useContext } from "react";
 import "./Cart.css";
-import ProductItemInCart from "./productIteminCart";
-import { AppContext } from "../context/AppContext";
+import ProductItemInCart from "./productItemInCart";
+import { useCart } from "../context/AppContext";
+
 function Cart() {
-  const { addToCart, addedProduct } = useContext(AppContext);
+  const { cartItems, totalCount, totalPrice } = useCart();
+
+  if (cartItems.length === 0) {
+    return (
+      <div className="cartContaner">
+        <p>Your shopping cart is empty.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="cartContaner">
-      {addToCart > 0 ? (
-        <>
-          {addedProduct.map((product) => (
-            <ProductItemInCart key={product.id} {...product} />
-          ))}
-        </>
-      ) : (
-        <p> the shopping cart is empty </p>
-      )}
+      {cartItems.map((product) => (
+        <ProductItemInCart key={product.id} {...product} />
+      ))}
+
+      <div className="cartSummary">
+        <span>
+          Items: <strong>{totalCount}</strong>
+        </span>
+        <span>
+          Total: <strong>{totalPrice.toLocaleString()} Toman</strong>
+        </span>
+      </div>
     </div>
   );
 }
