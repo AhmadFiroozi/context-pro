@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import { BsCart4 } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
-import { useCart } from "../context/AppContext";
+import { useCart } from "../context/cartContext";
 
 function Navbar() {
   const { totalCount } = useCart();

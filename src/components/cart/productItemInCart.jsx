@@ -1,6 +1,6 @@
 import "./productItemInCart.css";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { useCart } from "../context/AppContext";
+import { useCart } from "../context/cartContext";
 
 function ProductItemInCart({ id, name, price, image, count }) {
   const { increaseCount, decreaseCount, removeFromCart } = useCart();

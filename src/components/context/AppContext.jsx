@@ -1,6 +1,5 @@
-import { createContext, useContext, useState } from "react";
-
-export const AppContext = createContext(null);
+import { useState } from "react";
+import { AppContext } from "./cartContext";
 
 /**
  * Cart state lives here so any component can read or change it
@@ -69,16 +68,6 @@ function AppProvider({ children }) {
       {children}
     </AppContext.Provider>
   );
-}
-
-export function useCart() {
-  const context = useContext(AppContext);
-
-  if (!context) {
-    throw new Error("useCart must be used inside <AppProvider>");
-  }
-
-  return context;
 }
 
 export default AppProvider;

@@ -1,5 +1,5 @@
 import "./ProductItem.css";
-import { useCart } from "../context/AppContext";
+import { useCart } from "../context/cartContext";
 
 function ProductItem({ id, name, price, image }) {
   const { addToCart, cartItems } = useCart();

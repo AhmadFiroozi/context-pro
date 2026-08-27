@@ -1,6 +1,6 @@
 import "./Cart.css";
 import ProductItemInCart from "./productItemInCart";
-import { useCart } from "../context/AppContext";
+import { useCart } from "../context/cartContext";
 
 function Cart() {
   const { cartItems, totalCount, totalPrice } = useCart();
